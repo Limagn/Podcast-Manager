@@ -2,11 +2,12 @@
   "name": "projeto-app-flow",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "start:dev": "tsx src/server.ts",
+    "start:dev": "tsx --env-file=.env src/server.ts",
     "start:watch": "tsx watch src/server.ts",
     "dist": "tsup src",
     "start:dist": "npm run dist && node/server.js"
@@ -16,6 +17,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/node": "^24.3.1",
     "tsup": "^8.5.0",
     "tsx": "^4.20.5",
     "typescript": "^5.9.2"
