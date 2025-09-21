@@ -1,7 +1,7 @@
 # Criando HTTP
 
 ### Importar HTTP
-  - Importar todo o pacote HTTP que já vem no NodeJS, no `server.ts`
+  - Importar todo o pacote `HTTP` que já vem no NodeJS, no `server.ts`
 
     ```js
     import * as http from "http";

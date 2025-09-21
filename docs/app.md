@@ -42,6 +42,5 @@ Podcasts feitos em vídeo
         link: "https://www.youtube.com/watch?v=RxnSGjLx-vI",
         category: ["humor", "desafio", "dinamica"]
       },
-
     ]
   ```
