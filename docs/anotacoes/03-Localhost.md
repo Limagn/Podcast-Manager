@@ -46,7 +46,7 @@
   };
   ```
 
-## Como há um padrão no cover e no link, utilizando o videoId, não é necessário incluí-los.
+### Como há um padrão no cover e no link, utilizando o videoId, não é necessário incluí-los.
 
   - Retirar `cover` e `link`.
 
