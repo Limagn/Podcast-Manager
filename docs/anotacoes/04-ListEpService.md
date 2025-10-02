@@ -5,7 +5,7 @@
   - Não é função do controller devolver dados. Ele só deve controlar as requisições. (GET, POST, etc).
   - A responsabilidade de processar, verificar é da Service.
 
-  ### Criar constante
+  ### Criar função
 
   - Criar uma arrow function `serviceListEpisodes` para o service.
 

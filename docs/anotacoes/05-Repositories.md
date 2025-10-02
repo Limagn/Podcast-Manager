@@ -12,9 +12,9 @@
     
     #### `list-epidoes-service.ts`
     ```js
-    export const serviceListEpisodes = async () => {
-      const data = []
-    }
+      export const serviceListEpisodes = async () => {
+        const data = []
+      }
     ```
 
     #### `podcasts.json`
