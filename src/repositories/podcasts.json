@@ -16,5 +16,17 @@
     "episode": "RANKING DE SHAPE FT. RENATO CARIANI",
     "videoId": "OXg4tkQjcsY",
     "categories": ["humor", "desafio", "adivinhacao"]
-  } 
+  },
+  {
+    "podcastName": "Podpah",
+    "episode": "O ÚLTIMO EPISÓDIO - Podpah #960",
+    "videoId": "hREB2TcLQak",
+    "categories": ["humor", "bate-papo", "podcast"]
+  },
+  {
+    "podcastName": "Podpah",
+    "episode": "PÉRICLES - Podpah #945",
+    "videoId": "ccEfgtVwhIo",
+    "categories": ["musica", "bate-papo", "podcast"]
+  }
 ]
