@@ -5,18 +5,23 @@ import { getFilterEpisodes, getListEpisodes } from "./controllers/podcasts-contr
 const server = http.createServer(
   async (req: http.IncomingMessage, res: http.ServerResponse) => {
 
-    if (req.method === "GET" && req.url === "/api/list") {
+    // query string
+    // http://localhost:3333/api/episode?p=Podpah
+    const [baseUrl, queryString] = req.url?.split("?") ?? ["", ""];
+
+    // listar podcasts
+    if (req.method === "GET" && baseUrl === "/api/list") {
       await getListEpisodes(req, res);
     }
 
-    if (req.method === "GET" && req.url === "/api/episode") {
+    if (req.method === "GET" && baseUrl === "/api/episode") {
       await getFilterEpisodes(req, res);
     }
   }
 );
 
-const port = process.env.PORT
+const port = process.env.PORT;
 
 server.listen(port, () => {
-  console.log(`Servidor iniciado na porta ${port}.`)
+  console.log(`Servidor iniciado na porta ${port}.`);
 });

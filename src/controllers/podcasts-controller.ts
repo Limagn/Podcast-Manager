@@ -13,7 +13,13 @@ export const getListEpisodes = async (req: IncomingMessage, res: ServerResponse)
 };
 
 export const getFilterEpisodes = async (req: IncomingMessage, res: ServerResponse) => {
-  const content = await serviceFilterEpisodes("Podpah");
+  
+  const queryString = req.url?.split("?p=")[1] ?? "";
+
+  // Decodificando para pesquisar com espaço
+  const decodedQuery = decodeURIComponent(queryString);
+  
+  const content = await serviceFilterEpisodes(decodedQuery);
 
   res.writeHead(200, { "Content-Type": "application/json" });
   res.end(
