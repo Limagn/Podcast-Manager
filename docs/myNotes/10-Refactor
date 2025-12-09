@@ -1,6 +1,6 @@
 # Refactor
 
-## Refatorando o código.
+## Refatorando o controller.
   
   ### Movendo a queryString do `podcasts-controller.ts`
 
