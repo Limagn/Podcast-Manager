@@ -1,0 +1,103 @@
+# Refactor
+
+## Refatorando o código.
+  
+  ### Movendo a queryString do `podcasts-controller.ts`
+
+  - O controller não tem que fazer tratamento nenhum, portanto deve-se tirar a constante `queryString` de dentro dele e passar no `content` apenas o `req.url`
+
+  ```ts
+    export const getFilterEpisodes = async (req: IncomingMessage, res: ServerResponse) => {
+    
+      const queryString = req.url?.split("?p=")[1] ?? "";
+
+      // Decodificando para pesquisar com espaço
+      const decodedQuery = decodeURIComponent(queryString);
+      
+      const content = await serviceFilterEpisodes(decodedQuery);
+
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(
+        JSON.stringify(content)
+      );
+    }
+  ```
+
+  - agora:
+
+  ```ts
+    export const getFilterEpisodes = async (req: IncomingMessage, res: ServerResponse) => {
+      
+      const content = await serviceFilterEpisodes(req.url);
+
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(
+        JSON.stringify(content)
+      );
+    }
+  ```
+
+  ### Alterar `filter-episodes.ts`
+
+  - Com isso, o `req` do `serviceFilterEpisodes()` irá apresentar erro dentro do controller, pois ele espera uma string e não um `IncomingMessage` que está sendo passado agora.
+  - Alterar o `req` do `serviceFilterEpisodes()` para o tipo `IncomingMessage`.
+
+  ```ts
+    export const serviceFilterEpisodes = async (podcastName: IncomingMessage) => {
+
+      const queryString = req.url?.split("?p=")[1] ?? "";
+
+      // Decodificando para pesquisar com espaço
+      const decodedQuery = decodeURIComponent(queryString);
+
+      const data = await repositoryPodcast(podcastName);
+
+      return data;
+    }
+  ```
+
+  - Agora é necessário alterar a const `queryString` para receber o parâmetro `podcastName` do tipo `IncomingMessage`.
+  - Então, alterar o `data` para receber a query codificada. `decodeQuery`
+
+  ```ts
+    export const serviceFilterEpisodes = async (podcastName: IncomingMessage) => {
+
+      const queryString = podcastName?.split("?p=")[1] ?? "";
+
+      // Decodificando para pesquisar com espaço
+      const decodedQuery = decodeURIComponent(queryString);
+
+      const data = await repositoryPodcast(decodedQuery);
+
+      return data;
+    }
+  ```
+
+  - Porém, agora ocorrerá erro no `.split`, pois só existe para o tipo `string`.
+  - Então é preciso passar apenas a `.url` do `podcastname` no service, e então passar somente o `req` no controller `getFilterEpisodes`.
+
+  ```ts
+    export const serviceFilterEpisodes = async (podcastName: IncomingMessage) => {
+
+      const queryString = podcastName.url?.split("?p=")[1] ?? "";
+
+      // Decodificando para pesquisar com espaço
+      const decodedQuery = decodeURIComponent(queryString);
+
+      const data = await repositoryPodcast(decodedQuery);
+
+      return data;
+    }
+  ```
+  ```ts
+    export const getFilterEpisodes = async (req: IncomingMessage, res: ServerResponse) => {
+      
+      const content = await serviceFilterEpisodes(req);
+
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(
+        JSON.stringify(content)
+      );
+    }
+  ```
+  
