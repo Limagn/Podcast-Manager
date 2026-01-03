@@ -5,7 +5,10 @@ import { StatusCode } from "../utils/status-code";
 import { ContentType } from "../utils/content-type";
 
 
-export const getListEpisodes = async (req: IncomingMessage, res: ServerResponse) => {
+export const getListEpisodes = async (
+  req: IncomingMessage,
+  res: ServerResponse
+) => {
   const content = await serviceListEpisodes();
   
   res.writeHead(StatusCode.OK, { "Content-Type": ContentType.JSON });
